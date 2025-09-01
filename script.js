@@ -396,3 +396,147 @@ function openDriveTool() {
         document.head.appendChild(style);
     }
 }
+
+// Secure contact form handling
+document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.querySelector('.contact-form');
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data with sanitization
+            const formData = new FormData(contactForm);
+            const name = sanitizeInput(formData.get('name'));
+            const email = sanitizeInput(formData.get('email'));
+            const subject = sanitizeInput(formData.get('subject'));
+            const message = sanitizeInput(formData.get('message'));
+            
+            // Validate inputs
+            if (!validateForm(name, email, subject, message)) {
+                showNotification('Please fill all fields correctly.', 'error');
+                return;
+            }
+            
+            // Create secure mailto link
+            const mailtoLink = `mailto:Digitalcreatoruj@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+            
+            // Open email client
+            window.location.href = mailtoLink;
+            
+            // Show success message
+            showNotification('Email client opened! Please send the email to complete your message.', 'success');
+            
+            // Reset form
+            contactForm.reset();
+        });
+    }
+});
+
+// Input sanitization function
+function sanitizeInput(input) {
+    if (!input) return '';
+    return input.toString()
+        .replace(/[<>]/g, '') // Remove potential HTML tags
+        .replace(/javascript:/gi, '') // Remove javascript: protocol
+        .replace(/on\w+=/gi, '') // Remove event handlers
+        .trim()
+        .substring(0, 1000); // Limit length
+}
+
+// Form validation
+function validateForm(name, email, subject, message) {
+    // Check if all fields are filled
+    if (!name || !email || !subject || !message) {
+        return false;
+    }
+    
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        return false;
+    }
+    
+    // Check minimum lengths
+    if (name.length < 2 || subject.length < 5 || message.length < 10) {
+        return false;
+    }
+    
+    // Check for suspicious content
+    const suspiciousPatterns = [
+        /<script/gi,
+        /javascript:/gi,
+        /on\w+=/gi,
+        /data:/gi,
+        /vbscript:/gi
+    ];
+    
+    const allInputs = [name, email, subject, message].join(' ');
+    for (let pattern of suspiciousPatterns) {
+        if (pattern.test(allInputs)) {
+            return false;
+        }
+    }
+    
+    return true;
+}
+
+// Rate limiting for form submissions
+let lastSubmissionTime = 0;
+const SUBMISSION_COOLDOWN = 5000; // 5 seconds
+
+function checkRateLimit() {
+    const now = Date.now();
+    if (now - lastSubmissionTime < SUBMISSION_COOLDOWN) {
+        showNotification('Please wait before submitting again.', 'error');
+        return false;
+    }
+    lastSubmissionTime = now;
+    return true;
+}
+
+// Enhanced notification function with error handling
+function showNotification(message, type = 'info') {
+    // Remove existing notifications
+    const existingNotifications = document.querySelectorAll('.notification');
+    existingNotifications.forEach(notif => notif.remove());
+    
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${type === 'success' ? 'var(--success)' : type === 'error' ? 'var(--danger)' : 'var(--primary)'};
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        z-index: 10001;
+        opacity: 0;
+        transform: translateX(100px);
+        transition: all 0.3s ease;
+        max-width: 300px;
+        word-wrap: break-word;
+    `;
+    
+    // Sanitize message content
+    notification.textContent = sanitizeInput(message);
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.opacity = '1';
+        notification.style.transform = 'translateX(0)';
+    }, 10);
+    
+    setTimeout(() => {
+        notification.style.opacity = '0';
+        notification.style.transform = 'translateX(100px)';
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 300);
+    }, 4000);
+}
