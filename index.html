@@ -3,428 +3,375 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- Security Headers -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta name="referrer" content="strict-origin-when-cross-origin">
-    
-    <!-- SEO & Meta Information -->
-    <meta name="description" content="Umar J - Professional Python Developer & Agentic Coder from Pakistan. Specializing in AI solutions, automation tools, and intelligent systems.">
-    <meta name="keywords" content="Python Developer, AI Specialist, Automation Expert, Agentic Coder, Pakistan, Machine Learning, Web Development">
+
+    <!-- SEO -->
+    <meta name="description" content="Umar J — Python Developer & Agentic Coder from Pakistan. Building AI solutions, automation tools, and intelligent systems.">
+    <meta name="keywords" content="Python Developer, AI Specialist, Automation Expert, Agentic Coder, Pakistan">
     <meta name="author" content="Umar J">
     <meta name="robots" content="index, follow">
-    
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Umar J - Python Developer & Agentic Coder">
-    <meta property="og:description" content="Professional Python Developer specializing in AI solutions and automation tools">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Umar J — Python Developer & Agentic Coder">
+    <meta property="og:description" content="Building AI solutions & automation tools from Pakistan.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://your-domain.vercel.app">
-    <meta property="og:site_name" content="Umar J Portfolio">
-    
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Umar J - Python Developer & Agentic Coder">
-    <meta name="twitter:description" content="Professional Python Developer specializing in AI solutions and automation tools">
-    
-    <title>Umar J - Python Developer & Agentic Coder - Updated</title>
-    
-    <!-- Favicon - Using actual UJ logo -->
+    <meta property="og:site_name" content="Umar J">
+
+    <title>Umar J — Python Developer & Agentic Coder</title>
+
     <link rel="icon" href="/My icon.png" type="image/png">
     <link rel="shortcut icon" href="/My icon.png" type="image/png">
-    
-    <link rel="stylesheet" href="styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Loading Screen -->
+
+    <!-- Noise overlay -->
+    <div class="noise"></div>
+
+    <!-- Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursorFollower"></div>
+
+    <!-- Loading -->
     <div class="loading" id="loading">
-        <div class="loader"></div>
+        <div class="loading-inner">
+            <span class="load-letter">U</span>
+            <span class="load-letter">J</span>
+        </div>
     </div>
 
-    <!-- Scroll Progress Bar -->
-    <div class="scroll-progress" id="scrollProgress"></div>
-    
+    <!-- Scroll Progress -->
+    <div class="scroll-bar" id="scrollBar"></div>
+
     <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <h3>Umar<span class="text-gradient">J</span></h3>
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a href="#home" class="nav-logo" data-scroll>
+                <span class="logo-u">U</span><span class="logo-j">J</span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="#home" class="nav-link active" data-scroll>Home</a>
+                <a href="#work" class="nav-link" data-scroll>Work</a>
+                <a href="#about" class="nav-link" data-scroll>About</a>
+                <a href="mailto:umerjutt5397@gmail.com" class="nav-cta">Let's Talk →</a>
             </div>
-            <ul class="nav-menu" id="navMenu">
-                <li class="nav-item">
-                    <a href="#home" class="nav-link active">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#projects" class="nav-link">Projects</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#about" class="nav-link">About</a>
-                </li>
-            </ul>
-            <button class="mobile-menu-toggle" id="mobileToggle">
-                <i class="fas fa-bars"></i>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span><span></span>
             </button>
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- ── HERO ── -->
     <section id="home" class="hero">
-        <div class="hero-bg">
-            <div class="animated-gradient"></div>
-            <div class="floating-orbs">
-                <div class="orb orb-1"></div>
-                <div class="orb orb-2"></div>
-                <div class="orb orb-3"></div>
-                <div class="orb orb-4"></div>
-                <div class="orb orb-5"></div>
+        <div class="hero-grid-bg"></div>
+        <div class="hero-glow hero-glow-1"></div>
+        <div class="hero-glow hero-glow-2"></div>
+
+        <div class="container hero-container">
+            <div class="hero-left">
+                <div class="hero-badge" data-reveal>
+                    <span class="badge-dot"></span>
+                    Available for projects
+                </div>
+
+                <h1 class="hero-heading" data-reveal>
+                    <span class="line">I build</span>
+                    <span class="line accent-line">Intelligent</span>
+                    <span class="line">Software</span>
+                </h1>
+
+                <p class="hero-sub" data-reveal>
+                    Python developer & AI engineer crafting automation tools
+                    and agentic systems — based in Pakistan, building for everywhere.
+                </p>
+
+                <div class="hero-actions" data-reveal>
+                    <a href="#work" class="btn-primary" data-scroll>
+                        See my work
+                        <span class="btn-arrow">↓</span>
+                    </a>
+                    <a href="mailto:umerjutt5397@gmail.com" class="btn-ghost">
+                        umerjutt5397@gmail.com
+                    </a>
+                </div>
+
+                <div class="hero-stats" data-reveal>
+                    <div class="stat">
+                        <span class="stat-num">50+</span>
+                        <span class="stat-label">Projects built</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat">
+                        <span class="stat-num">3+</span>
+                        <span class="stat-label">Years exp.</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat">
+                        <span class="stat-num">∞</span>
+                        <span class="stat-label">Problems solved</span>
+                    </div>
+                </div>
             </div>
-            <div class="grid-pattern"></div>
+
+            <div class="hero-right" data-reveal>
+                <div class="profile-wrap">
+                    <div class="profile-ring"></div>
+                    <div class="profile-img-box">
+                        <img src="profile-image.jpg" alt="Umar J" class="profile-img">
+                        <div class="profile-shimmer"></div>
+                    </div>
+
+                    <div class="profile-chip chip-1">
+                        <i class="fab fa-python"></i>
+                        <span>Python</span>
+                    </div>
+                    <div class="profile-chip chip-2">
+                        <i class="fas fa-robot"></i>
+                        <span>AI Agents</span>
+                    </div>
+                    <div class="profile-chip chip-3">
+                        <i class="fas fa-bolt"></i>
+                        <span>Automation</span>
+                    </div>
+                    <div class="profile-chip chip-4">
+                        <i class="fas fa-code"></i>
+                        <span>Web Dev</span>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <div class="hero-scroll-hint">
+            <span>scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- ── WORK ── -->
+    <section id="work" class="work">
         <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <div class="status-badge">
-                        <div class="pulse-dot"></div>
-                        <span>Welcome to my portfolio</span>
-                    </div>
-                    <h1 class="hero-title">
-                        <span class="greeting-text">Hi, I'm</span>
-                        <span class="name-gradient">Umar J</span>
-                        <div class="typing-container">
-                            <span class="typing-text">Python Developer</span>
-                            <span class="cursor">|</span>
-                        </div>
-                    </h1>
-                    <p class="hero-subtitle">
-                        Crafting intelligent AI solutions and automation magic ✨
-                    </p>
-                    <p class="hero-description">
-                        I transform complex problems into elegant code, building AI agents that think, 
-                        learn, and evolve. Based in Pakistan, creating for the world 🌍
-                    </p>
-                    
-                    <div class="hero-metrics">
-                        <div class="metric-card">
-                            <div class="metric-number">50+</div>
-                            <div class="metric-label">Projects Built</div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="metric-number">3+</div>
-                            <div class="metric-label">Years Experience</div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="metric-number">100%</div>
-                            <div class="metric-label">Client Satisfaction</div>
-                        </div>
-                    </div>
+            <div class="section-header" data-reveal>
+                <span class="section-label">Selected Work</span>
+                <h2 class="section-title">Projects that <em>ship</em></h2>
+            </div>
 
-                    <div class="hero-actions">
-                        <a href="#projects" class="btn-modern primary">
-                            <span class="btn-text">View My Work</span>
-                            <i class="fas fa-arrow-right btn-icon"></i>
-                        </a>
-                        <a href="#about" class="btn-modern secondary">
-                            <span class="btn-text">About Me</span>
-                            <i class="fas fa-user btn-icon"></i>
-                        </a>
+            <div class="projects-list">
+
+                <!-- Project 1 -->
+                <div class="project-row" data-reveal>
+                    <div class="project-num">01</div>
+                    <div class="project-main">
+                        <div class="project-top">
+                            <h3 class="project-name">Drive to Drive Transfer Tool</h3>
+                            <span class="project-tag live-tag">Live</span>
+                        </div>
+                        <p class="project-desc">
+                            Seamless file migration between Google Drive accounts using Google Apps Script.
+                            Handles large folders, preserves structure, and runs entirely in the cloud — no installs needed.
+                        </p>
+                        <div class="project-pills">
+                            <span>Google Apps Script</span>
+                            <span>Drive API</span>
+                            <span>JavaScript</span>
+                            <span>Cloud</span>
+                        </div>
+                        <div class="project-links">
+                            <button onclick="openDriveTool()" class="link-btn primary-link">
+                                <i class="fas fa-rocket"></i> Launch Tool
+                            </button>
+                            <a href="https://github.com/umarj-max" target="_blank" class="link-btn ghost-link">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                        </div>
                     </div>
+                    <div class="project-accent accent-blue"></div>
                 </div>
 
-                <div class="hero-visual">
-                    <div class="profile-container">
-                        <div class="profile-glow"></div>
-                        <div class="profile-card">
-                            <div class="card-bg"></div>
-                            <div class="profile-image-wrapper">
-                                <img src="profile-image.jpg?v=2" alt="Umar J" class="profile-image">
-                                <div class="image-overlay"></div>
-                            </div>
-                            <div class="profile-info">
-                                <h3 class="profile-name">Umar J</h3>
-                                <p class="profile-role">Python Developer & AI Specialist</p>
-                                <div class="tech-stack">
-                                    <span class="tech-item">Python</span>
-                                    <span class="tech-item">AI</span>
-                                    <span class="tech-item">Automation</span>
-                                </div>
-                            </div>
+                <!-- Project 2 -->
+                <div class="project-row featured-row" data-reveal>
+                    <div class="project-num">02</div>
+                    <div class="project-main">
+                        <div class="project-top">
+                            <h3 class="project-name">Tools Collection Hub</h3>
+                            <span class="project-tag live-tag">Live Hub</span>
+                        </div>
+                        <p class="project-desc">
+                            A comprehensive digital toolbox — 15+ utilities including converters, calculators,
+                            generators, and analyzers. Built with Next.js for blazing speed. One place for everything.
+                        </p>
+                        <div class="hub-icons-row">
+                            <div class="hub-icon-cell"><i class="fas fa-calculator"></i></div>
+                            <div class="hub-icon-cell"><i class="fas fa-file-pdf"></i></div>
+                            <div class="hub-icon-cell"><i class="fas fa-image"></i></div>
+                            <div class="hub-icon-cell"><i class="fas fa-code"></i></div>
+                            <div class="hub-icon-cell more">+11</div>
+                        </div>
+                        <div class="project-pills">
+                            <span class="pill-react">React</span>
+                            <span class="pill-next">Next.js</span>
+                            <span class="pill-vercel">Vercel</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://tools-collection-ten.vercel.app/" target="_blank" class="link-btn primary-link">
+                                <i class="fas fa-external-link-alt"></i> Explore All Tools
+                            </a>
                         </div>
                     </div>
-                    
-                    <div class="floating-elements">
-                        <div class="float-item float-1">
-                            <i class="fab fa-python"></i>
-                        </div>
-                        <div class="float-item float-2">
-                            <i class="fas fa-robot"></i>
-                        </div>
-                        <div class="float-item float-3">
-                            <i class="fas fa-brain"></i>
-                        </div>
-                        <div class="float-item float-4">
-                            <i class="fas fa-code"></i>
-                        </div>
-                    </div>
+                    <div class="project-accent accent-multi"></div>
                 </div>
+
+            </div>
+
+            <div class="work-cta" data-reveal>
+                <p>Want to see more?</p>
+                <a href="https://github.com/umarj-max" target="_blank" class="btn-ghost with-icon">
+                    <i class="fab fa-github"></i> umarj-max on GitHub
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Featured Projects</h2>
-                <p class="section-subtitle">Innovative tools and applications that solve real-world problems</p>
-            </div>
-            
-            <div class="projects-grid">
-                <!-- Drive to Drive Tool -->
-                <div class="project-card featured" data-aos="fade-up">
-                    <div class="project-header">
-                        <div class="project-icon">
-                            <i class="fas fa-cloud-upload-alt"></i>
-                        </div>
-                        <div class="project-status">
-                            <span class="status-live">Live</span>
-                        </div>
+    <!-- ── ABOUT ── -->
+    <section id="about" class="about">
+        <div class="container about-grid">
+
+            <div class="about-left" data-reveal>
+                <span class="section-label">About</span>
+                <h2 class="section-title">A builder at<br>heart</h2>
+                <p class="about-body">
+                    I'm Umar J — a Python developer and AI engineer based in Dunyapur, Punjab, Pakistan.
+                    I've spent years turning complex problems into clean, working solutions:
+                    AI agents, automation pipelines, web apps, and everything in between.
+                </p>
+                <p class="about-body">
+                    Beyond code, I'm an ACCA/FIA student — so I understand both the technical and
+                    business sides of what I build. I believe the best software solves real problems.
+                </p>
+
+                <div class="about-contact" data-reveal>
+                    <div class="contact-row">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:umerjutt5397@gmail.com">umerjutt5397@gmail.com</a>
                     </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Drive to Drive Transfer Tool</h3>
-                        <p class="project-description">
-                            Advanced cloud storage transfer application that enables seamless file migration 
-                            between different Google Drive accounts. Built with Google Apps Script for maximum efficiency.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Google Apps Script</span>
-                            <span class="tech-tag">Drive API</span>
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">Cloud Storage</span>
-                        </div>
-                        <div class="project-actions">
-                            <button onclick="openDriveTool()" class="btn-project primary">
-                                <i class="fas fa-rocket"></i>
-                                <span>Launch Tool</span>
-                            </button>
-                            <a href="https://github.com" class="btn-project secondary" target="_blank">
-                                <i class="fab fa-github"></i>
-                                <span>Source</span>
-                            </a>
-                        </div>
+                    <div class="contact-row">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Dunyapur, Punjab, Pakistan</span>
                     </div>
                 </div>
 
-                <!-- Tool Collection Hub - Special Design -->
-                <div class="project-card hub-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="hub-header">
-                        <div class="hub-grid">
-                            <div class="mini-tool">
-                                <i class="fas fa-calculator"></i>
-                            </div>
-                            <div class="mini-tool">
-                                <i class="fas fa-file-pdf"></i>
-                            </div>
-                            <div class="mini-tool">
-                                <i class="fas fa-image"></i>
-                            </div>
-                            <div class="mini-tool">
-                                <i class="fas fa-code"></i>
-                            </div>
-                        </div>
-                        <div class="hub-overlay">
-                            <div class="hub-icon">
-                                <i class="fas fa-th-large"></i>
-                            </div>
-                            <div class="project-status hub-status">
-                                <span class="status-live">Live Hub</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title hub-title">
-                            <i class="fas fa-cube"></i>
-                            Tools Collection Hub
-                        </h3>
-                        <p class="project-description">
-                            A comprehensive digital toolbox featuring multiple utilities in one place. 
-                            From converters and calculators to generators and analyzers - everything you need for productivity.
-                        </p>
-                        <div class="hub-features">
-                            <div class="feature-item">
-                                <i class="fas fa-bolt"></i>
-                                <span>15+ Tools</span>
-                            </div>
-                            <div class="feature-item">
-                                <i class="fas fa-rocket"></i>
-                                <span>Fast & Efficient</span>
-                            </div>
-                            <div class="feature-item">
-                                <i class="fas fa-mobile-alt"></i>
-                                <span>Mobile Ready</span>
-                            </div>
-                        </div>
-                        <div class="project-tech hub-tech">
-                            <span class="tech-tag react">React</span>
-                            <span class="tech-tag nextjs">Next.js</span>
-                            <span class="tech-tag vercel">Vercel</span>
-                            <span class="tech-tag ui">Modern UI</span>
-                        </div>
-                        <div class="project-actions hub-actions">
-                            <a href="https://tools-collection-ten.vercel.app/" class="btn-project hub-primary" target="_blank">
-                                <i class="fas fa-external-link-alt"></i>
-                                <span>Explore All Tools</span>
-                            </a>
-                            <a href="#about" class="btn-project hub-secondary">
-                                <i class="fas fa-info-circle"></i>
-                                <span>Learn More</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- More Projects CTA -->
-            <div class="cta-section" data-aos="fade-up" data-aos-delay="300">
-                <div class="cta-content">
-                    <h3>Want to see more projects?</h3>
-                    <p>Check out my complete tools collection for more innovative projects and utilities</p>
-                    <a href="https://tools-collection-ten.vercel.app/" class="btn-modern primary cta-btn" target="_blank">
-                        <span class="btn-text">View All Projects</span>
-                        <i class="fas fa-arrow-right btn-icon"></i>
+                <div class="socials" data-reveal>
+                    <a href="https://github.com/umarj-max" target="_blank" class="social-btn">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/umarj" target="_blank" class="social-btn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://twitter.com/umarj" target="_blank" class="social-btn">
+                        <i class="fab fa-twitter"></i>
                     </a>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">About Me</h2>
-                <p class="section-subtitle">Passionate about creating intelligent solutions that make a difference</p>
-            </div>
-            
-            <div class="about-content">
-                <div class="about-info" data-aos="fade-right">
-                    <div class="about-text">
-                        <p class="lead">
-                            I'm Umar J, a passionate Python Developer and Agentic Coder based in Pakistan. 
-                            I specialize in building intelligent AI solutions and automation tools that solve real-world problems.
-                        </p>
-                        <p>
-                            With over 3 years of experience in software development, I've worked on diverse projects 
-                            ranging from AI agents to web applications. My expertise lies in Python development, 
-                            AI integration, and creating efficient automation solutions.
-                        </p>
-                        <p>
-                            When I'm not coding, I enjoy exploring new technologies, contributing to open-source projects, 
-                            and sharing knowledge with the developer community.
-                        </p>
+            <div class="about-right" data-reveal>
+                <div class="skills-block">
+                    <h3 class="skills-heading">Technical Stack</h3>
+
+                    <div class="skill-row">
+                        <div class="skill-meta">
+                            <i class="fab fa-python skill-ico"></i>
+                            <span>Python</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-fill" data-width="95"></div>
+                        </div>
+                        <span class="skill-pct">95%</span>
                     </div>
-                    
-                    <div class="contact-info">
-                        <h3>Get In Touch</h3>
-                        <div class="contact-methods">
-                            <div class="contact-item">
-                                <i class="fas fa-envelope"></i>
-                                <span>Digitalcreatoruj@gmail.com</span>
-                            </div>
-                            <div class="contact-item">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Pakistan</span>
-                            </div>
-                            <div class="contact-item">
-                                <i class="fas fa-code"></i>
-                                <span>Python Developer & Agentic Coder</span>
-                            </div>
+
+                    <div class="skill-row">
+                        <div class="skill-meta">
+                            <i class="fas fa-robot skill-ico"></i>
+                            <span>AI & Agents</span>
                         </div>
-                        
-                        <div class="social-links">
-                            <a href="https://github.com/UmarJ" class="social-link" target="_blank">
-                                <i class="fab fa-github"></i>
-                            </a>
-                            <a href="https://linkedin.com/in/umarj" class="social-link" target="_blank">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
-                            <a href="https://twitter.com/umarj" class="social-link" target="_blank">
-                                <i class="fab fa-twitter"></i>
-                            </a>
+                        <div class="skill-bar">
+                            <div class="skill-fill" data-width="90"></div>
                         </div>
+                        <span class="skill-pct">90%</span>
+                    </div>
+
+                    <div class="skill-row">
+                        <div class="skill-meta">
+                            <i class="fas fa-cogs skill-ico"></i>
+                            <span>Automation</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-fill" data-width="92"></div>
+                        </div>
+                        <span class="skill-pct">92%</span>
+                    </div>
+
+                    <div class="skill-row">
+                        <div class="skill-meta">
+                            <i class="fas fa-globe skill-ico"></i>
+                            <span>Web Dev</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-fill" data-width="80"></div>
+                        </div>
+                        <span class="skill-pct">80%</span>
+                    </div>
+
+                    <div class="skill-row">
+                        <div class="skill-meta">
+                            <i class="fas fa-database skill-ico"></i>
+                            <span>Data Science</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-fill" data-width="85"></div>
+                        </div>
+                        <span class="skill-pct">85%</span>
                     </div>
                 </div>
-                
-                <div class="skills-section" data-aos="fade-left">
-                    <h3>Technical Skills</h3>
-                    <div class="skills-grid">
-                        <div class="skill-card">
-                            <div class="skill-icon">
-                                <i class="fab fa-python"></i>
-                            </div>
-                            <div class="skill-info">
-                                <h4>Python</h4>
-                                <p>Core language for all projects</p>
-                                <div class="skill-progress">
-                                    <div class="progress-bar" data-width="95%"></div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="skill-card">
-                            <div class="skill-icon">
-                                <i class="fas fa-robot"></i>
-                            </div>
-                            <div class="skill-info">
-                                <h4>AI & Machine Learning</h4>
-                                <p>Intelligent autonomous systems</p>
-                                <div class="skill-progress">
-                                    <div class="progress-bar" data-width="90%"></div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="skill-card">
-                            <div class="skill-icon">
-                                <i class="fas fa-cogs"></i>
-                            </div>
-                            <div class="skill-info">
-                                <h4>Automation</h4>
-                                <p>Process optimization</p>
-                                <div class="skill-progress">
-                                    <div class="progress-bar" data-width="92%"></div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="skill-card">
-                            <div class="skill-icon">
-                                <i class="fas fa-database"></i>
-                            </div>
-                            <div class="skill-info">
-                                <h4>Data Science</h4>
-                                <p>Analytics & insights</p>
-                                <div class="skill-progress">
-                                    <div class="progress-bar" data-width="85%"></div>
-                                </div>
-                            </div>
-                        </div>
+
+                <div class="tools-block">
+                    <h3 class="skills-heading">Tools & Ecosystem</h3>
+                    <div class="tools-grid">
+                        <div class="tool-chip"><i class="fab fa-python"></i> Python</div>
+                        <div class="tool-chip"><i class="fas fa-brain"></i> LangChain</div>
+                        <div class="tool-chip"><i class="fas fa-robot"></i> OpenAI API</div>
+                        <div class="tool-chip"><i class="fab fa-js"></i> JavaScript</div>
+                        <div class="tool-chip"><i class="fab fa-react"></i> React</div>
+                        <div class="tool-chip"><i class="fas fa-server"></i> FastAPI</div>
+                        <div class="tool-chip"><i class="fab fa-git-alt"></i> Git</div>
+                        <div class="tool-chip"><i class="fas fa-cloud"></i> Vercel</div>
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- ── FOOTER ── -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <h3>Umar<span class="text-gradient">J</span></h3>
-                </div>
-                <p>&copy; 2025 Umar J. All rights reserved. Built with passion and code.</p>
+        <div class="container footer-inner">
+            <div class="footer-left">
+                <span class="footer-logo">Umar<span>J</span></span>
+                <p>Python Developer & Agentic Coder<br>Pakistan 🇵🇰</p>
+            </div>
+            <div class="footer-right">
+                <a href="mailto:umerjutt5397@gmail.com" class="footer-mailto">
+                    umerjutt5397@gmail.com ↗
+                </a>
+                <p class="footer-copy">© 2025 Umar J. Built with intent.</p>
             </div>
         </div>
     </footer>
