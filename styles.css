@@ -308,6 +308,7 @@ body {
     display:flex; flex-direction:column; align-items:center; gap:6px;
     font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-3);
 }
+@media (max-width:900px) { .hero-scroll-hint { display:none; } }
 .scroll-line {
     width:1px; height:36px;
     background:linear-gradient(to bottom, var(--text-3), transparent);
