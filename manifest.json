@@ -1,0 +1,17 @@
+{
+  "name": "Umar J — Python Developer",
+  "short_name": "Umar J",
+  "description": "Python Developer & Agentic Coder from Pakistan",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b0c0e",
+  "theme_color": "#00e5c3",
+  "icons": [
+    {
+      "src": "My icon.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
