@@ -96,80 +96,70 @@ body {
 .reveal.visible { opacity:1; transform:none; }
 
 /* ─────────────────────────────────────────
-   NAVIGATION — all links always in a row.
-   Hamburger only below 520px.
+   NAVIGATION — ALWAYS one line, no hamburger.
+   Shrinks gracefully on small phones.
 ───────────────────────────────────────── */
 .nav {
     position:fixed; top:0; left:0; right:0; z-index:1000;
-    padding:0.85rem var(--pad-x);
+    padding:0.7rem 1rem;
     transition:background 0.3s, border-bottom 0.3s;
 }
 .nav.solid {
-    background:rgba(11,12,14,0.9);
+    background:rgba(11,12,14,0.92);
     backdrop-filter:blur(24px) saturate(160%);
     -webkit-backdrop-filter:blur(24px) saturate(160%);
     border-bottom:1px solid var(--border);
 }
 .nav-inner {
     max-width:var(--container); margin:0 auto;
-    display:flex; align-items:center; justify-content:space-between; gap:0.5rem;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:0.25rem; flex-wrap:nowrap;
 }
 .nav-logo {
-    font-family:var(--font-display); font-size:1.4rem; font-weight:800;
-    letter-spacing:-0.03em; text-decoration:none; flex-shrink:0;
+    font-family:var(--font-display); font-size:1.3rem; font-weight:800;
+    letter-spacing:-0.03em; text-decoration:none; flex-shrink:0; line-height:1;
 }
 .logo-u { color:var(--text); }
 .logo-j { color:var(--accent); }
 
+/* Links row — always visible, always horizontal */
 .nav-links {
-    display:flex; align-items:center; gap:2px; flex-wrap:nowrap;
+    display:flex !important;
+    align-items:center; gap:1px; flex-wrap:nowrap;
+    /* Reset any positional styles so it's always inline */
+    position:static !important;
+    transform:none !important;
+    opacity:1 !important;
+    pointer-events:all !important;
+    background:transparent !important;
+    border:none !important;
+    padding:0 !important;
 }
 .nav-link {
     color:var(--text-2); text-decoration:none;
-    font-size:0.875rem; font-weight:500;
-    padding:0.42rem 0.8rem; border-radius:var(--r-pill); white-space:nowrap;
+    font-size:0.82rem; font-weight:500;
+    padding:0.38rem 0.65rem; border-radius:var(--r-pill); white-space:nowrap;
     transition:color 0.2s, background 0.2s;
 }
 .nav-link:hover, .nav-link.active { color:var(--text); background:var(--surface); }
 
 .nav-cta {
     background:var(--accent); color:var(--ink) !important;
-    text-decoration:none; font-size:0.8rem; font-weight:700;
-    padding:0.48rem 1rem; border-radius:var(--r-pill);
-    margin-left:0.4rem; white-space:nowrap; flex-shrink:0;
+    text-decoration:none; font-size:0.75rem; font-weight:700;
+    padding:0.42rem 0.85rem; border-radius:var(--r-pill);
+    margin-left:0.3rem; white-space:nowrap; flex-shrink:0;
     transition:opacity 0.2s, transform 0.2s;
 }
 .nav-cta:hover { opacity:0.85; transform:translateY(-1px); }
 
-/* Hamburger — hidden by default */
-.nav-toggle {
-    display:none; flex-direction:column; gap:5px;
-    background:none; border:none; cursor:pointer; padding:5px; flex-shrink:0;
-}
-.nav-toggle span {
-    display:block; width:21px; height:2px;
-    background:var(--text); border-radius:2px; transition:all 0.3s;
-}
-.nav-toggle.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
-.nav-toggle.open span:nth-child(2) { transform:translateY(0) rotate(-45deg); }
+/* Hamburger — completely hidden, never used */
+.nav-toggle { display:none !important; }
 
-/* Only collapse on very small phones */
-@media (max-width:520px) {
-    .nav-toggle { display:flex; }
-    .nav-links {
-        position:fixed; top:56px; left:0; right:0;
-        flex-direction:column; align-items:flex-start;
-        background:rgba(11,12,14,0.97);
-        backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px);
-        border-bottom:1px solid var(--border);
-        padding:0.9rem 1.25rem 1.4rem; gap:2px;
-        transform:translateY(-110%); opacity:0;
-        transition:transform 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.3s;
-        pointer-events:none; z-index:999;
-    }
-    .nav-links.open { transform:translateY(0); opacity:1; pointer-events:all; }
-    .nav-link { padding:0.65rem 0.75rem; width:100%; }
-    .nav-cta { margin:0.35rem 0 0; }
+/* Tiny phones: shrink text further so everything fits */
+@media (max-width:380px) {
+    .nav-link  { font-size:0.72rem; padding:0.32rem 0.48rem; }
+    .nav-cta   { font-size:0.68rem; padding:0.36rem 0.65rem; }
+    .nav-logo  { font-size:1.1rem; }
 }
 
 /* ── HERO ── */
