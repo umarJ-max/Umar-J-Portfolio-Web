@@ -1,29 +1,24 @@
 /* ============================================================
    UMAR J PORTFOLIO — script.js
-   Fixed: smooth scroll, reveal observer, skill bars, nav, mailto
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', function () {
 
-    /* ── 1. LOADING SCREEN ── */
+    /* ── 1. LOADING ── */
     var loading = document.getElementById('loading');
     window.addEventListener('load', function () {
-        setTimeout(function () {
-            loading.classList.add('gone');
-        }, 800);
+        setTimeout(function () { loading.classList.add('gone'); }, 750);
     });
 
-    /* ── 2. CUSTOM CURSOR ── */
+    /* ── 2. CUSTOM CURSOR (desktop only) ── */
     var cursor   = document.getElementById('cursor');
     var follower = document.getElementById('cursorFollower');
-    if (cursor && follower && window.matchMedia('(pointer: fine)').matches) {
-        var cx = 0, cy = 0;
+    if (cursor && follower && window.matchMedia('(pointer:fine)').matches) {
         document.addEventListener('mousemove', function (e) {
-            cx = e.clientX; cy = e.clientY;
-            cursor.style.left = cx + 'px';
-            cursor.style.top  = cy + 'px';
-            follower.style.left = cx + 'px';
-            follower.style.top  = cy + 'px';
+            cursor.style.left   = e.clientX + 'px';
+            cursor.style.top    = e.clientY + 'px';
+            follower.style.left = e.clientX + 'px';
+            follower.style.top  = e.clientY + 'px';
         });
         document.querySelectorAll('a, button').forEach(function (el) {
             el.addEventListener('mouseenter', function () {
@@ -35,29 +30,32 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    /* ── 3. SMOOTH SCROLL ── */
-    /* Handles all anchors with class "smooth-scroll" and plain href="#..." anchors */
-    function smoothScrollTo(targetId) {
-        var target = document.querySelector(targetId);
-        if (!target) return;
-        var offset = target.getBoundingClientRect().top + window.scrollY - 75;
-        window.scrollTo({ top: offset, behavior: 'smooth' });
+    /* ── 3. SMOOTH SCROLL ──
+       Works for all anchors with class "smooth-scroll".
+       mailto: links are intentionally skipped so email works on PC.
+    ── */
+    function scrollToId(id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        var top = el.getBoundingClientRect().top + window.scrollY - 72;
+        window.scrollTo({ top: top, behavior: 'smooth' });
     }
 
-    document.querySelectorAll('a.smooth-scroll').forEach(function (link) {
-        link.addEventListener('click', function (e) {
-            var href = this.getAttribute('href');
-            if (href && href.startsWith('#')) {
-                e.preventDefault();
-                smoothScrollTo(href);
-                /* Close mobile menu if open */
-                navLinks.classList.remove('open');
-                navToggle.classList.remove('open');
-            }
+    document.querySelectorAll('a.smooth-scroll').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+            var href = this.getAttribute('href') || '';
+            /* Only intercept anchor links, not mailto: or external */
+            if (href.charAt(0) !== '#') return;
+            e.preventDefault();
+            var id = href.slice(1);
+            scrollToId(id);
+            /* Close mobile menu if open */
+            navLinks.classList.remove('open');
+            navToggle.classList.remove('open');
         });
     });
 
-    /* ── 4. NAVIGATION ── */
+    /* ── 4. NAV — mobile toggle ── */
     var nav      = document.getElementById('nav');
     var navToggle= document.getElementById('navToggle');
     var navLinks = document.getElementById('navLinks');
@@ -67,120 +65,102 @@ document.addEventListener('DOMContentLoaded', function () {
         navLinks.classList.toggle('open');
     });
 
-    /* Close mobile menu on any nav-link click */
-    navLinks.querySelectorAll('.nav-link').forEach(function (link) {
+    /* Close menu on any nav-link click */
+    navLinks.querySelectorAll('.nav-link, .nav-cta').forEach(function (link) {
         link.addEventListener('click', function () {
             navToggle.classList.remove('open');
             navLinks.classList.remove('open');
         });
     });
 
-    /* ── 5. SCROLL PROGRESS + NAV SOLID + ACTIVE LINK ── */
-    var scrollBar = document.getElementById('scrollBar');
-    var sections  = Array.from(document.querySelectorAll('section[id]'));
-    var allNavLinks = Array.from(document.querySelectorAll('.nav-link[href^="#"]'));
+    window.addEventListener('resize', function () {
+        if (window.innerWidth > 520) {
+            navToggle.classList.remove('open');
+            navLinks.classList.remove('open');
+        }
+    });
+
+    /* ── 5. SCROLL PROGRESS + SOLID NAV + ACTIVE LINK ── */
+    var scrollBar   = document.getElementById('scrollBar');
+    var sections    = Array.from(document.querySelectorAll('section[id]'));
+    var navLinkEls  = Array.from(document.querySelectorAll('.nav-link[href^="#"]'));
 
     function onScroll() {
         var scrollTop    = window.scrollY;
         var scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
 
-        /* Scroll bar */
-        if (scrollBar) {
-            var pct = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
-            scrollBar.style.width = pct + '%';
-        }
+        /* Progress bar */
+        if (scrollBar) scrollBar.style.width = (scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0) + '%';
 
-        /* Solid nav */
-        if (scrollTop > 50) {
-            nav.classList.add('solid');
-        } else {
-            nav.classList.remove('solid');
-        }
+        /* Solid nav background */
+        nav.classList.toggle('solid', scrollTop > 50);
 
         /* Active nav link */
         var current = '';
-        sections.forEach(function (sec) {
-            if (scrollTop >= sec.offsetTop - 130) {
-                current = sec.id;
-            }
+        sections.forEach(function (s) {
+            if (scrollTop >= s.offsetTop - 130) current = s.id;
         });
-        allNavLinks.forEach(function (link) {
-            var href = link.getAttribute('href');
-            link.classList.toggle('active', href === '#' + current);
+        navLinkEls.forEach(function (l) {
+            l.classList.toggle('active', l.getAttribute('href') === '#' + current);
         });
+
+        /* Skill bars */
+        animateSkills();
     }
 
-    var scrollTicking = false;
+    var ticking = false;
     window.addEventListener('scroll', function () {
-        if (!scrollTicking) {
-            requestAnimationFrame(function () {
-                onScroll();
-                scrollTicking = false;
-            });
-            scrollTicking = true;
+        if (!ticking) {
+            requestAnimationFrame(function () { onScroll(); ticking = false; });
+            ticking = true;
         }
     });
     onScroll();
 
-    /* ── 6. REVEAL ON SCROLL (IntersectionObserver) ── */
-    /* We use IntersectionObserver so elements animate in as they scroll into view.
-       The hero elements get shown immediately after load so the page isn't blank. */
-    var revealObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                revealObserver.unobserve(entry.target); /* Fire once only */
+    /* ── 6. REVEAL — IntersectionObserver ──
+       Hero elements shown immediately so page is never blank.
+       Everything else reveals as you scroll.
+    ── */
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+            if (e.isIntersecting) {
+                e.target.classList.add('visible');
+                observer.unobserve(e.target);
             }
         });
-    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
 
     document.querySelectorAll('.reveal').forEach(function (el) {
-        revealObserver.observe(el);
+        observer.observe(el);
     });
 
-    /* Show hero reveals immediately so the hero is never blank on load */
+    /* Show hero immediately */
     setTimeout(function () {
         document.querySelectorAll('.hero .reveal').forEach(function (el) {
             el.classList.add('visible');
         });
-    }, 300);
+    }, 200);
 
-    /* ── 7. SKILL BAR ANIMATION ── */
+    /* ── 7. SKILL BARS ── */
     var skillsDone = false;
-
-    function animateSkillBars() {
+    function animateSkills() {
         if (skillsDone) return;
         var bars = document.querySelectorAll('.skill-fill');
-        var allVisible = true;
-        bars.forEach(function (bar) {
-            var rect = bar.getBoundingClientRect();
-            if (rect.top < window.innerHeight - 30) {
-                bar.style.width = bar.getAttribute('data-width') + '%';
-            } else {
-                allVisible = false;
-            }
+        var allIn = true;
+        bars.forEach(function (b) {
+            if (b.getBoundingClientRect().top < window.innerHeight - 20) {
+                b.style.width = b.getAttribute('data-width') + '%';
+            } else { allIn = false; }
         });
-        if (allVisible) skillsDone = true;
+        if (allIn) skillsDone = true;
     }
-
-    window.addEventListener('scroll', animateSkillBars);
-    animateSkillBars();
 
     /* ── 8. DRIVE TOOL ── */
     window.openDriveTool = function () {
         window.open(
             'https://script.google.com/macros/s/AKfycbzVgsOWqUD28F0nsJsKYHN2WptsAZO2kX2H3Uo31uDPsXHvImsnn9-YqzG1_24mLslv/exec',
-            '_blank',
-            'noopener,noreferrer'
+            '_blank', 'noopener,noreferrer'
         );
     };
-
-    /* ── 9. CLOSE MOBILE MENU ON RESIZE ── */
-    window.addEventListener('resize', function () {
-        if (window.innerWidth > 768) {
-            navToggle.classList.remove('open');
-            navLinks.classList.remove('open');
-        }
-    });
 
 });
