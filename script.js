@@ -1,144 +1,185 @@
 /* ============================================================
    UMAR J PORTFOLIO — script.js
+   Fixed: smooth scroll, reveal observer, skill bars, nav, mailto
    ============================================================ */
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function () {
 
-    // ── Loading screen ──────────────────────────────────────
-    const loading = document.getElementById('loading');
-    window.addEventListener('load', () => {
-        setTimeout(() => loading.classList.add('gone'), 900);
+    /* ── 1. LOADING SCREEN ── */
+    var loading = document.getElementById('loading');
+    window.addEventListener('load', function () {
+        setTimeout(function () {
+            loading.classList.add('gone');
+        }, 800);
     });
 
-    // ── Custom cursor ────────────────────────────────────────
-    const cursor = document.getElementById('cursor');
-    const follower = document.getElementById('cursorFollower');
+    /* ── 2. CUSTOM CURSOR ── */
+    var cursor   = document.getElementById('cursor');
+    var follower = document.getElementById('cursorFollower');
     if (cursor && follower && window.matchMedia('(pointer: fine)').matches) {
-        let mx = 0, my = 0, fx = 0, fy = 0;
-        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-        const animateCursor = () => {
-            cursor.style.left = mx + 'px';
-            cursor.style.top  = my + 'px';
-            fx += (mx - fx) * 0.12;
-            fy += (my - fy) * 0.12;
-            follower.style.left = fx + 'px';
-            follower.style.top  = fy + 'px';
-            requestAnimationFrame(animateCursor);
-        };
-        animateCursor();
-
-        // Grow follower on interactive elements
-        document.querySelectorAll('a, button, [data-scroll]').forEach(el => {
-            el.addEventListener('mouseenter', () => follower.style.transform = 'translate(-50%,-50%) scale(1.8)');
-            el.addEventListener('mouseleave', () => follower.style.transform = 'translate(-50%,-50%) scale(1)');
+        var cx = 0, cy = 0;
+        document.addEventListener('mousemove', function (e) {
+            cx = e.clientX; cy = e.clientY;
+            cursor.style.left = cx + 'px';
+            cursor.style.top  = cy + 'px';
+            follower.style.left = cx + 'px';
+            follower.style.top  = cy + 'px';
+        });
+        document.querySelectorAll('a, button').forEach(function (el) {
+            el.addEventListener('mouseenter', function () {
+                follower.style.transform = 'translate(-50%,-50%) scale(1.7)';
+            });
+            el.addEventListener('mouseleave', function () {
+                follower.style.transform = 'translate(-50%,-50%) scale(1)';
+            });
         });
     }
 
-    // ── Navigation ───────────────────────────────────────────
-    const nav      = document.getElementById('nav');
-    const toggle   = document.getElementById('navToggle');
-    const navLinks = document.getElementById('navLinks');
+    /* ── 3. SMOOTH SCROLL ── */
+    /* Handles all anchors with class "smooth-scroll" and plain href="#..." anchors */
+    function smoothScrollTo(targetId) {
+        var target = document.querySelector(targetId);
+        if (!target) return;
+        var offset = target.getBoundingClientRect().top + window.scrollY - 75;
+        window.scrollTo({ top: offset, behavior: 'smooth' });
+    }
 
-    toggle?.addEventListener('click', () => {
-        toggle.classList.toggle('open');
+    document.querySelectorAll('a.smooth-scroll').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+            var href = this.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                e.preventDefault();
+                smoothScrollTo(href);
+                /* Close mobile menu if open */
+                navLinks.classList.remove('open');
+                navToggle.classList.remove('open');
+            }
+        });
+    });
+
+    /* ── 4. NAVIGATION ── */
+    var nav      = document.getElementById('nav');
+    var navToggle= document.getElementById('navToggle');
+    var navLinks = document.getElementById('navLinks');
+
+    navToggle.addEventListener('click', function () {
+        navToggle.classList.toggle('open');
         navLinks.classList.toggle('open');
     });
 
-    // Close on link click
-    navLinks?.querySelectorAll('.nav-link, .nav-cta').forEach(link => {
-        link.addEventListener('click', () => {
-            toggle?.classList.remove('open');
+    /* Close mobile menu on any nav-link click */
+    navLinks.querySelectorAll('.nav-link').forEach(function (link) {
+        link.addEventListener('click', function () {
+            navToggle.classList.remove('open');
             navLinks.classList.remove('open');
         });
     });
 
-    // Smooth scroll for [data-scroll] elements
-    document.querySelectorAll('[data-scroll], a[href^="#"]').forEach(el => {
-        el.addEventListener('click', e => {
-            const href = el.getAttribute('href') || el.getAttribute('data-href');
-            if (!href || !href.startsWith('#')) return;
-            e.preventDefault();
-            const target = document.querySelector(href);
-            if (target) {
-                const offset = target.getBoundingClientRect().top + window.scrollY - 80;
-                window.scrollTo({ top: offset, behavior: 'smooth' });
-            }
-        });
-    });
-
-    // ── Scroll effects ───────────────────────────────────────
-    const scrollBar = document.getElementById('scrollBar');
-    const allNavLinks = document.querySelectorAll('.nav-link[href^="#"]');
-    const sections    = document.querySelectorAll('section[id]');
+    /* ── 5. SCROLL PROGRESS + NAV SOLID + ACTIVE LINK ── */
+    var scrollBar = document.getElementById('scrollBar');
+    var sections  = Array.from(document.querySelectorAll('section[id]'));
+    var allNavLinks = Array.from(document.querySelectorAll('.nav-link[href^="#"]'));
 
     function onScroll() {
-        const scrollTop    = window.scrollY;
-        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const pct          = scrollTop / scrollHeight;
+        var scrollTop    = window.scrollY;
+        var scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
 
-        // Scroll bar
-        if (scrollBar) scrollBar.style.width = (pct * 100) + '%';
+        /* Scroll bar */
+        if (scrollBar) {
+            var pct = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+            scrollBar.style.width = pct + '%';
+        }
 
-        // Nav solid
-        nav.classList.toggle('solid', scrollTop > 60);
+        /* Solid nav */
+        if (scrollTop > 50) {
+            nav.classList.add('solid');
+        } else {
+            nav.classList.remove('solid');
+        }
 
-        // Active nav link
-        let current = '';
-        sections.forEach(sec => {
-            if (scrollTop >= sec.offsetTop - 120) current = sec.id;
-        });
-        allNavLinks.forEach(l => {
-            l.classList.toggle('active', l.getAttribute('href') === '#' + current);
-        });
-
-        // Reveal elements
-        revealElements();
-
-        // Skill bars
-        animateSkillBars();
-    }
-
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-        if (!ticking) { requestAnimationFrame(() => { onScroll(); ticking = false; }); ticking = true; }
-    });
-    onScroll(); // initial
-
-    // ── Reveal on scroll ─────────────────────────────────────
-    function revealElements() {
-        document.querySelectorAll('[data-reveal]:not(.visible)').forEach(el => {
-            const top = el.getBoundingClientRect().top;
-            if (top < window.innerHeight - 80) el.classList.add('visible');
-        });
-    }
-    revealElements();
-
-    // ── Skill bars ────────────────────────────────────────────
-    const skillsDone = new Set();
-    function animateSkillBars() {
-        document.querySelectorAll('.skill-fill').forEach(bar => {
-            if (skillsDone.has(bar)) return;
-            const top = bar.getBoundingClientRect().top;
-            if (top < window.innerHeight - 40) {
-                bar.style.width = bar.dataset.width + '%';
-                skillsDone.add(bar);
+        /* Active nav link */
+        var current = '';
+        sections.forEach(function (sec) {
+            if (scrollTop >= sec.offsetTop - 130) {
+                current = sec.id;
             }
         });
+        allNavLinks.forEach(function (link) {
+            var href = link.getAttribute('href');
+            link.classList.toggle('active', href === '#' + current);
+        });
     }
 
-    // ── Drive tool ───────────────────────────────────────────
-    window.openDriveTool = () => {
+    var scrollTicking = false;
+    window.addEventListener('scroll', function () {
+        if (!scrollTicking) {
+            requestAnimationFrame(function () {
+                onScroll();
+                scrollTicking = false;
+            });
+            scrollTicking = true;
+        }
+    });
+    onScroll();
+
+    /* ── 6. REVEAL ON SCROLL (IntersectionObserver) ── */
+    /* We use IntersectionObserver so elements animate in as they scroll into view.
+       The hero elements get shown immediately after load so the page isn't blank. */
+    var revealObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target); /* Fire once only */
+            }
+        });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(function (el) {
+        revealObserver.observe(el);
+    });
+
+    /* Show hero reveals immediately so the hero is never blank on load */
+    setTimeout(function () {
+        document.querySelectorAll('.hero .reveal').forEach(function (el) {
+            el.classList.add('visible');
+        });
+    }, 300);
+
+    /* ── 7. SKILL BAR ANIMATION ── */
+    var skillsDone = false;
+
+    function animateSkillBars() {
+        if (skillsDone) return;
+        var bars = document.querySelectorAll('.skill-fill');
+        var allVisible = true;
+        bars.forEach(function (bar) {
+            var rect = bar.getBoundingClientRect();
+            if (rect.top < window.innerHeight - 30) {
+                bar.style.width = bar.getAttribute('data-width') + '%';
+            } else {
+                allVisible = false;
+            }
+        });
+        if (allVisible) skillsDone = true;
+    }
+
+    window.addEventListener('scroll', animateSkillBars);
+    animateSkillBars();
+
+    /* ── 8. DRIVE TOOL ── */
+    window.openDriveTool = function () {
         window.open(
             'https://script.google.com/macros/s/AKfycbzVgsOWqUD28F0nsJsKYHN2WptsAZO2kX2H3Uo31uDPsXHvImsnn9-YqzG1_24mLslv/exec',
-            '_blank'
+            '_blank',
+            'noopener,noreferrer'
         );
     };
 
-    // ── Resize: reset mobile menu ─────────────────────────────
-    window.addEventListener('resize', () => {
+    /* ── 9. CLOSE MOBILE MENU ON RESIZE ── */
+    window.addEventListener('resize', function () {
         if (window.innerWidth > 768) {
-            toggle?.classList.remove('open');
-            navLinks?.classList.remove('open');
+            navToggle.classList.remove('open');
+            navLinks.classList.remove('open');
         }
     });
 
