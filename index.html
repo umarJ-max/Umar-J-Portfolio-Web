@@ -3,66 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Security Headers -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
-    <meta name="referrer" content="strict-origin-when-cross-origin">
-
-    <!-- SEO -->
     <meta name="description" content="Umar J — Python Developer & Agentic Coder from Pakistan. Building AI solutions, automation tools, and intelligent systems.">
-    <meta name="keywords" content="Python Developer, AI Specialist, Automation Expert, Agentic Coder, Pakistan">
     <meta name="author" content="Umar J">
     <meta name="robots" content="index, follow">
-
-    <!-- Open Graph -->
     <meta property="og:title" content="Umar J — Python Developer & Agentic Coder">
     <meta property="og:description" content="Building AI solutions & automation tools from Pakistan.">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Umar J">
-
     <title>Umar J — Python Developer & Agentic Coder</title>
-
-    <link rel="icon" href="/My icon.png" type="image/png">
-    <link rel="shortcut icon" href="/My icon.png" type="image/png">
-
+    <link rel="icon" href="My icon.png" type="image/png">
+    <link rel="shortcut icon" href="My icon.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <!-- Noise overlay -->
     <div class="noise"></div>
-
-    <!-- Cursor -->
     <div class="cursor" id="cursor"></div>
     <div class="cursor-follower" id="cursorFollower"></div>
 
     <!-- Loading -->
     <div class="loading" id="loading">
         <div class="loading-inner">
-            <span class="load-letter">U</span>
-            <span class="load-letter">J</span>
+            <span class="load-u">U</span><span class="load-j">J</span>
         </div>
     </div>
 
-    <!-- Scroll Progress -->
+    <!-- Scroll progress bar -->
     <div class="scroll-bar" id="scrollBar"></div>
 
-    <!-- Navigation -->
+    <!-- ── NAV ── -->
     <nav class="nav" id="nav">
         <div class="nav-inner">
-            <a href="#home" class="nav-logo" data-scroll>
+            <a href="#home" class="nav-logo smooth-scroll">
                 <span class="logo-u">U</span><span class="logo-j">J</span>
             </a>
             <div class="nav-links" id="navLinks">
-                <a href="#home" class="nav-link active" data-scroll>Home</a>
-                <a href="#work" class="nav-link" data-scroll>Work</a>
-                <a href="#about" class="nav-link" data-scroll>About</a>
+                <a href="#home" class="nav-link active smooth-scroll">Home</a>
+                <a href="#work" class="nav-link smooth-scroll">Work</a>
+                <a href="#about" class="nav-link smooth-scroll">About</a>
                 <a href="mailto:umerjutt5397@gmail.com" class="nav-cta">Let's Talk →</a>
             </div>
             <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
@@ -79,33 +62,32 @@
 
         <div class="container hero-container">
             <div class="hero-left">
-                <div class="hero-badge" data-reveal>
+                <div class="hero-badge reveal">
                     <span class="badge-dot"></span>
                     Available for projects
                 </div>
 
-                <h1 class="hero-heading" data-reveal>
+                <h1 class="hero-heading reveal">
                     <span class="line">I build</span>
                     <span class="line accent-line">Intelligent</span>
                     <span class="line">Software</span>
                 </h1>
 
-                <p class="hero-sub" data-reveal>
-                    Python developer & AI engineer crafting automation tools
+                <p class="hero-sub reveal">
+                    Python developer &amp; AI engineer crafting automation tools
                     and agentic systems — based in Pakistan, building for everywhere.
                 </p>
 
-                <div class="hero-actions" data-reveal>
-                    <a href="#work" class="btn-primary" data-scroll>
-                        See my work
-                        <span class="btn-arrow">↓</span>
+                <div class="hero-actions reveal">
+                    <a href="#work" class="btn-primary smooth-scroll">
+                        See my work <span class="btn-arrow">↓</span>
                     </a>
-                    <a href="#about" class="btn-ghost" data-scroll>
+                    <a href="#about" class="btn-ghost smooth-scroll">
                         About me
                     </a>
                 </div>
 
-                <div class="hero-stats" data-reveal>
+                <div class="hero-stats reveal">
                     <div class="stat">
                         <span class="stat-num">50+</span>
                         <span class="stat-label">Projects built</span>
@@ -123,30 +105,17 @@
                 </div>
             </div>
 
-            <div class="hero-right" data-reveal>
+            <div class="hero-right reveal">
                 <div class="profile-wrap">
                     <div class="profile-ring"></div>
                     <div class="profile-img-box">
                         <img src="profile-image.jpg" alt="Umar J" class="profile-img">
                         <div class="profile-shimmer"></div>
                     </div>
-
-                    <div class="profile-chip chip-1">
-                        <i class="fab fa-python"></i>
-                        <span>Python</span>
-                    </div>
-                    <div class="profile-chip chip-2">
-                        <i class="fas fa-robot"></i>
-                        <span>AI Agents</span>
-                    </div>
-                    <div class="profile-chip chip-3">
-                        <i class="fas fa-bolt"></i>
-                        <span>Automation</span>
-                    </div>
-                    <div class="profile-chip chip-4">
-                        <i class="fas fa-code"></i>
-                        <span>Web Dev</span>
-                    </div>
+                    <div class="profile-chip chip-1"><i class="fab fa-python"></i><span>Python</span></div>
+                    <div class="profile-chip chip-2"><i class="fas fa-robot"></i><span>AI Agents</span></div>
+                    <div class="profile-chip chip-3"><i class="fas fa-bolt"></i><span>Automation</span></div>
+                    <div class="profile-chip chip-4"><i class="fas fa-code"></i><span>Web Dev</span></div>
                 </div>
             </div>
         </div>
@@ -160,24 +129,24 @@
     <!-- ── WORK ── -->
     <section id="work" class="work">
         <div class="container">
-            <div class="section-header" data-reveal>
+            <div class="section-header reveal">
                 <span class="section-label">Selected Work</span>
                 <h2 class="section-title">Projects that <em>ship</em></h2>
             </div>
 
             <div class="projects-list">
 
-                <!-- Project 1 -->
-                <div class="project-row" data-reveal>
+                <!-- Project 01 -->
+                <div class="project-row reveal">
                     <div class="project-num">01</div>
                     <div class="project-main">
                         <div class="project-top">
                             <h3 class="project-name">Drive to Drive Transfer Tool</h3>
-                            <span class="project-tag live-tag">Live</span>
+                            <span class="project-tag">Live</span>
                         </div>
                         <p class="project-desc">
                             Seamless file migration between Google Drive accounts using Google Apps Script.
-                            Handles large folders, preserves structure, and runs entirely in the cloud — no installs needed.
+                            Handles large folders, preserves folder structure, and runs entirely in the cloud — no installs needed.
                         </p>
                         <div class="project-pills">
                             <span>Google Apps Script</span>
@@ -186,35 +155,35 @@
                             <span>Cloud</span>
                         </div>
                         <div class="project-links">
-                            <button onclick="openDriveTool()" class="link-btn primary-link">
+                            <button onclick="openDriveTool()" class="link-btn link-primary">
                                 <i class="fas fa-rocket"></i> Launch Tool
                             </button>
-                            <a href="https://github.com/umarj-max" target="_blank" class="link-btn ghost-link">
+                            <a href="https://github.com/umarj-max" target="_blank" rel="noopener" class="link-btn link-ghost">
                                 <i class="fab fa-github"></i> GitHub
                             </a>
                         </div>
                     </div>
-                    <div class="project-accent accent-blue"></div>
+                    <div class="accent-stripe stripe-blue"></div>
                 </div>
 
-                <!-- Project 2 -->
-                <div class="project-row featured-row" data-reveal>
+                <!-- Project 02 -->
+                <div class="project-row featured-row reveal">
                     <div class="project-num">02</div>
                     <div class="project-main">
                         <div class="project-top">
                             <h3 class="project-name">Tools Collection Hub</h3>
-                            <span class="project-tag live-tag">Live Hub</span>
+                            <span class="project-tag">Live Hub</span>
                         </div>
                         <p class="project-desc">
                             A comprehensive digital toolbox — 15+ utilities including converters, calculators,
                             generators, and analyzers. Built with Next.js for blazing speed. One place for everything.
                         </p>
-                        <div class="hub-icons-row">
-                            <div class="hub-icon-cell"><i class="fas fa-calculator"></i></div>
-                            <div class="hub-icon-cell"><i class="fas fa-file-pdf"></i></div>
-                            <div class="hub-icon-cell"><i class="fas fa-image"></i></div>
-                            <div class="hub-icon-cell"><i class="fas fa-code"></i></div>
-                            <div class="hub-icon-cell more">+11</div>
+                        <div class="hub-icon-row">
+                            <div class="hub-ic"><i class="fas fa-calculator"></i></div>
+                            <div class="hub-ic"><i class="fas fa-file-pdf"></i></div>
+                            <div class="hub-ic"><i class="fas fa-image"></i></div>
+                            <div class="hub-ic"><i class="fas fa-code"></i></div>
+                            <div class="hub-ic more-ic">+11</div>
                         </div>
                         <div class="project-pills">
                             <span class="pill-react">React</span>
@@ -222,19 +191,19 @@
                             <span class="pill-vercel">Vercel</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://tools-collection-ten.vercel.app/" target="_blank" class="link-btn primary-link">
+                            <a href="https://tools-collection-ten.vercel.app/" target="_blank" rel="noopener" class="link-btn link-primary">
                                 <i class="fas fa-external-link-alt"></i> Explore All Tools
                             </a>
                         </div>
                     </div>
-                    <div class="project-accent accent-multi"></div>
+                    <div class="accent-stripe stripe-multi"></div>
                 </div>
 
             </div>
 
-            <div class="work-cta" data-reveal>
+            <div class="work-cta reveal">
                 <p>Want to see more?</p>
-                <a href="https://github.com/umarj-max" target="_blank" class="btn-ghost with-icon">
+                <a href="https://github.com/umarj-max" target="_blank" rel="noopener" class="btn-ghost with-icon">
                     <i class="fab fa-github"></i> umarj-max on GitHub
                 </a>
             </div>
@@ -245,20 +214,20 @@
     <section id="about" class="about">
         <div class="container about-grid">
 
-            <div class="about-left" data-reveal>
-                <span class="section-label">About</span>
-                <h2 class="section-title">A builder at<br>heart</h2>
-                <p class="about-body">
+            <div class="about-left">
+                <span class="section-label reveal">About</span>
+                <h2 class="section-title reveal">A builder at<br>heart</h2>
+                <p class="about-body reveal">
                     I'm Umar J — a Python developer and AI engineer based in Dunyapur, Punjab, Pakistan.
                     I've spent years turning complex problems into clean, working solutions:
                     AI agents, automation pipelines, web apps, and everything in between.
                 </p>
-                <p class="about-body">
+                <p class="about-body reveal">
                     Beyond code, I'm an ACCA/FIA student — so I understand both the technical and
-                    business sides of what I build. I believe the best software solves real problems.
+                    business sides of what I build. The best software solves real problems.
                 </p>
 
-                <div class="about-contact" data-reveal>
+                <div class="about-contact reveal">
                     <div class="contact-row">
                         <i class="fas fa-envelope"></i>
                         <a href="mailto:umerjutt5397@gmail.com">umerjutt5397@gmail.com</a>
@@ -269,81 +238,52 @@
                     </div>
                 </div>
 
-                <div class="socials" data-reveal>
-                    <a href="https://github.com/umarj-max" target="_blank" class="social-btn">
+                <div class="socials reveal">
+                    <a href="https://github.com/umarj-max" target="_blank" rel="noopener" class="social-btn" aria-label="GitHub">
                         <i class="fab fa-github"></i>
                     </a>
-                    <a href="https://linkedin.com/in/umarj" target="_blank" class="social-btn">
+                    <a href="https://linkedin.com/in/umarj" target="_blank" rel="noopener" class="social-btn" aria-label="LinkedIn">
                         <i class="fab fa-linkedin"></i>
                     </a>
-                    <a href="https://twitter.com/umarj" target="_blank" class="social-btn">
+                    <a href="https://twitter.com/umarj" target="_blank" rel="noopener" class="social-btn" aria-label="Twitter">
                         <i class="fab fa-twitter"></i>
                     </a>
                 </div>
             </div>
 
-            <div class="about-right" data-reveal>
-                <div class="skills-block">
+            <div class="about-right">
+                <div class="skills-block reveal">
                     <h3 class="skills-heading">Technical Stack</h3>
 
                     <div class="skill-row">
-                        <div class="skill-meta">
-                            <i class="fab fa-python skill-ico"></i>
-                            <span>Python</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-fill" data-width="95"></div>
-                        </div>
+                        <div class="skill-meta"><i class="fab fa-python skill-ico"></i><span>Python</span></div>
+                        <div class="skill-bar"><div class="skill-fill" data-width="95"></div></div>
                         <span class="skill-pct">95%</span>
                     </div>
-
                     <div class="skill-row">
-                        <div class="skill-meta">
-                            <i class="fas fa-robot skill-ico"></i>
-                            <span>AI & Agents</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-fill" data-width="90"></div>
-                        </div>
+                        <div class="skill-meta"><i class="fas fa-robot skill-ico"></i><span>AI &amp; Agents</span></div>
+                        <div class="skill-bar"><div class="skill-fill" data-width="90"></div></div>
                         <span class="skill-pct">90%</span>
                     </div>
-
                     <div class="skill-row">
-                        <div class="skill-meta">
-                            <i class="fas fa-cogs skill-ico"></i>
-                            <span>Automation</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-fill" data-width="92"></div>
-                        </div>
+                        <div class="skill-meta"><i class="fas fa-cogs skill-ico"></i><span>Automation</span></div>
+                        <div class="skill-bar"><div class="skill-fill" data-width="92"></div></div>
                         <span class="skill-pct">92%</span>
                     </div>
-
                     <div class="skill-row">
-                        <div class="skill-meta">
-                            <i class="fas fa-globe skill-ico"></i>
-                            <span>Web Dev</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-fill" data-width="80"></div>
-                        </div>
+                        <div class="skill-meta"><i class="fas fa-globe skill-ico"></i><span>Web Dev</span></div>
+                        <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
                         <span class="skill-pct">80%</span>
                     </div>
-
                     <div class="skill-row">
-                        <div class="skill-meta">
-                            <i class="fas fa-database skill-ico"></i>
-                            <span>Data Science</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-fill" data-width="85"></div>
-                        </div>
+                        <div class="skill-meta"><i class="fas fa-database skill-ico"></i><span>Data Science</span></div>
+                        <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
                         <span class="skill-pct">85%</span>
                     </div>
                 </div>
 
-                <div class="tools-block">
-                    <h3 class="skills-heading">Tools & Ecosystem</h3>
+                <div class="tools-block reveal">
+                    <h3 class="skills-heading">Tools &amp; Ecosystem</h3>
                     <div class="tools-grid">
                         <div class="tool-chip"><i class="fab fa-python"></i> Python</div>
                         <div class="tool-chip"><i class="fas fa-brain"></i> LangChain</div>
@@ -365,7 +305,7 @@
         <div class="container footer-inner">
             <div class="footer-left">
                 <span class="footer-logo">Umar<span>J</span></span>
-                <p>Python Developer & Agentic Coder<br>Pakistan 🇵🇰</p>
+                <p>Python Developer &amp; Agentic Coder<br>Pakistan 🇵🇰</p>
             </div>
             <div class="footer-right">
                 <a href="mailto:umerjutt5397@gmail.com" class="footer-mailto">
